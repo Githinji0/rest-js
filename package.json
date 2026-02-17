@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
   },
   "repository": {
     "type": "git",
@@ -13,14 +15,19 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "bugs": {
     "url": "https://github.com/Githinji0/rest-js/issues"
   },
   "homepage": "https://github.com/Githinji0/rest-js#readme",
   "dependencies": {
+    "@prisma/client": "^7.4.0",
+    "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "mongoose": "^9.2.1",
     "nodemon": "^3.1.11"
+  },
+  "devDependencies": {
+    "prisma": "^7.4.0"
   }
 }

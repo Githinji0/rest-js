@@ -30,3 +30,6 @@ logs/
 # Build
 dist/
 build/
+/src/generated/prisma
+
+.agents
