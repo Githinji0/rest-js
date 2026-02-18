@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client/extension";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient({
   log:
@@ -13,7 +13,7 @@ const connectToDatabase = async () => {
     console.log("Connected to the database successfully.");
   } catch (error) {
     console.error("Error connecting to the database:", error.message);
-    process.exit(1); // Exit the process with an error code
+    process.exit(1);
   }
 };
 
@@ -27,4 +27,4 @@ const disconnectFromDatabase = async () => {
   }
 };
 
-export default { prisma, connectToDatabase, disconnectFromDatabase };
+export { prisma, connectToDatabase, disconnectFromDatabase };
