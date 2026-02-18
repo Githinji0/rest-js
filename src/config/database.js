@@ -13,6 +13,7 @@ const connectToDatabase = async () => {
     console.log("Connected to the database successfully.");
   } catch (error) {
     console.error("Error connecting to the database:", error.message);
+    process.exit(1); // Exit the process with an error code
   }
 };
 
@@ -22,6 +23,7 @@ const disconnectFromDatabase = async () => {
     console.log("Disconnected from the database successfully.");
   } catch (error) {
     console.error("Error disconnecting from the database:", error.message);
+    console.exit(1);
   }
 };
 
