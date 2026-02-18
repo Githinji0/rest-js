@@ -23,8 +23,8 @@ const disconnectFromDatabase = async () => {
     console.log("Disconnected from the database successfully.");
   } catch (error) {
     console.error("Error disconnecting from the database:", error.message);
-    console.exit(1);
+    process.exit(1);
   }
 };
 
-export default prisma;
+export default { prisma, connectToDatabase, disconnectFromDatabase };
