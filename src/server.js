@@ -6,9 +6,12 @@ import {
   disconnectFromDatabase,
 } from "./config/database.js";
 
+import authRoutes from "./routes/auth.routes.js";
+
 const app = express();
 
 app.use("/movies", movieRoutes);
+app.use("/auth", authRoutes);
 
 connectToDatabase();
 config();
