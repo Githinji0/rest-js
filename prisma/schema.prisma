@@ -26,6 +26,9 @@ model User {
   email String @unique // Must be unique per user
   password String // Should be hashed
   createdAt DateTime @default(now())
+
+  movies Movie[] @relation(name: "MovieCreator") // Movies created by the user
+  watchlistItems WatchlistItem[] // Movies in the user's watchlist
 }
 
 model Movie {
@@ -38,6 +41,10 @@ model Movie {
   posterUrl String?
   createdBy String
   createdAt DateTime @default(now())
+
+  creator User @relation(name: "MovieCreator", fields: [createdBy], references: [id], onDelete: Cascade)
+
+  watchlistItems WatchlistItem[] 
 }
 
 model WatchlistItem {
@@ -49,4 +56,8 @@ model WatchlistItem {
   status WatchlistStatus @default(PLANNED)
   updatedAt DateTime @default(now())
   createdAt DateTime @default(now())
+
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  movie Movie @relation(fields: [movieId], references: [id], onDelete: Cascade)
 }
