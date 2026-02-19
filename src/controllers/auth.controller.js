@@ -45,4 +45,36 @@ const registerUser = async (req, res) => {
   }
 };
 
-export { registerUser };
+const loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await prisma.user.findUnique({
+      where: { email: email },
+    });
+    if (!user) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    // If login is successful, return user details (excluding password)
+    res.status(201).json({
+      status: "Success",
+      data: {
+        user: {
+          id: user.id,
+          email: user.email,
+        },
+      },
+    });
+  } catch (error) {
+    console.error("Error logging in user:", error);
+    res.status(500).json({ error: "Failed to log in user" });
+  }
+};
+
+export { registerUser, loginUser };
