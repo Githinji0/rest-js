@@ -7,13 +7,21 @@ import {
 } from "./config/database.js";
 
 import authRoutes from "./routes/auth.routes.js";
-
+// Initialize Express application
 const app = express();
 
+// Middleware to parse JSON request bodies
+app.use(express.json());
+// Middleware to parse URL-encoded request bodies
+app.use(express.urlencoded({ extended: true }));
+
+// Route handlers
 app.use("/movies", movieRoutes);
 app.use("/auth", authRoutes);
 
+// Initialize database connection
 connectToDatabase();
+// Load environment variables from .env file
 config();
 
 const PORT = process.env.PORT || 3000;

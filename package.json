@@ -22,6 +22,7 @@
   "homepage": "https://github.com/Githinji0/rest-js#readme",
   "dependencies": {
     "@prisma/client": "6.19.2",
+    "bcrypt": "^6.0.0",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "mongoose": "^9.2.1",
