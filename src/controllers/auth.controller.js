@@ -1,6 +1,7 @@
 import { prisma } from "../config/database.js";
 import bcrypt from "bcrypt";
 import { generateToken } from "../utils/generateToken.js";
+import e from "express";
 
 const registerUser = async (req, res) => {
   try {
@@ -28,7 +29,7 @@ const registerUser = async (req, res) => {
         password: hashedPassword,
       },
     });
-    const token = generateToken(user.id);
+    const token = generateToken(user.id, res);
 
     //responding with the created user details (excluding password)
     res.status(201).json({
@@ -64,7 +65,7 @@ const loginUser = async (req, res) => {
     }
 
     // Generate JWT token for authenticated user
-    const token = generateToken(user.id);
+    const token = generateToken(user.id, res);
 
     // If login is successful, return user details (excluding password)
     res.status(201).json({
@@ -83,4 +84,20 @@ const loginUser = async (req, res) => {
   }
 };
 
-export { registerUser, loginUser };
+const logoutUser = (req, res) => {
+  try {
+    res.clearCookie("jwt",{
+        httpOnly: true,
+        expires: new Date(0), // Set cookie expiration to a past date which is instantly expired
+    });
+
+
+
+    res.status(200).json({ message: "User logged out successfully" });
+  } catch (error) {
+    console.error("Error logging out user:", error);
+    res.status(500).json({ error: "Failed to log out user" });
+  }
+};
+
+export { registerUser, loginUser, logoutUser };
