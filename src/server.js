@@ -1,6 +1,7 @@
 import express from "express";
 import { config } from "dotenv";
 import movieRoutes from "./routes/movieRoutes.js";
+import watchlistRoutes from "./routes/watchlist.routes.js";
 import {
   connectToDatabase,
   disconnectFromDatabase,
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: true }));
 // Route handlers
 app.use("/movies", movieRoutes);
 app.use("/auth", authRoutes);
+app.use("/watchlist", watchlistRoutes);
 
 // Initialize database connection
 connectToDatabase();
