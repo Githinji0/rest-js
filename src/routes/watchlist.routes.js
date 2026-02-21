@@ -5,10 +5,6 @@ import authMiddleware from "../middleware/auth.midleware.js";
 
 const routerAuth = express.Router();
 
-
-routerAuth.use( authMiddleware );
-routerAuth.post("/", addTowatchlist);
-
-
+routerAuth.post("/", authMiddleware, addTowatchlist);
 
 export default routerAuth;
