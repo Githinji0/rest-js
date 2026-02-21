@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
  const addTowatchlist = async (req, res) => {
   try {
-    const { status, rating, notes, movieId, userId } = req.body;
+    const { status, rating, notes, movieId, } = req.body;
 
     const movie = await prisma.movie.findUnique({
       where: { id: movieId },
@@ -15,7 +15,7 @@ const prisma = new PrismaClient();
     const existingInWatchlist = await prisma.watchlistItem.findUnique({
       where: {
         userId_movieId: {
-          userId: userId,
+          userId: req.user.id,
           movieId: movieId,
         },
       },
@@ -27,7 +27,7 @@ const prisma = new PrismaClient();
 
     const watchlistItem = await prisma.watchlistItem.create({
       data: {
-        userId,
+        userId: req.user.id,
         movieId,
         status: status || "PLANNED",
         rating,
