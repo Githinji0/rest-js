@@ -7,4 +7,7 @@ const routerAuth = express.Router();
 
 routerAuth.post("/", authMiddleware, addTowatchlist);
 
+routerAuth.delete("/:id", authMiddleware, async (req, res) => {})
+
+
 export default routerAuth;
