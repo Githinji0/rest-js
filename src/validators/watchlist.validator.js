@@ -19,3 +19,5 @@ const addToWatchlistSchema = z.object({
     .optional(),
   notes: z.string().max(500, "Notes cannot exceed 500 characters").optional(),
 });
+
+export { addToWatchlistSchema };

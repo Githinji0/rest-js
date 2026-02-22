@@ -2,12 +2,16 @@ import express from "express";
 import router from "./movieRoutes.js";
 import { addTowatchlist, removeFromWatchlist, updateWatchlistItem } from "../controllers/watchlist.contoller.js";
 import authMiddleware from "../middleware/auth.midleware.js";
+import { validateRequest } from "../middleware/validate.midleware.js";
+import { addToWatchlistSchema } from "../validators/watchlist.validator.js";
 
 const routerAuth = express.Router();
 
-routerAuth.post("/", authMiddleware, addTowatchlist);
+routerAuth.use(authMiddleware);
 
-routerAuth.delete("/:id", authMiddleware, removeFromWatchlist);
-routerAuth.put("/:id", authMiddleware, updateWatchlistItem);
+routerAuth.post("/", validateRequest(addToWatchlistSchema), addTowatchlist);
+
+routerAuth.delete("/:id",removeFromWatchlist);
+routerAuth.put("/:id", validateRequest, updateWatchlistItem);
 
 export default routerAuth;
